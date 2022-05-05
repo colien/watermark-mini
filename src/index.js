@@ -1,6 +1,6 @@
 
 const { WaterMark } = require("./watermark.js");
-const { debounce, assign } = require("./utils.js");
+const { debounce, assign, getDateTime } = require("./utils.js");
 const { EventListener } = require("./observe/EventListener");
 const { defaultOpt } = require("./default.js");
 
@@ -56,6 +56,7 @@ class Index{
     this.watermark.status = false;
     this.watermark.remove();
   }
+  getDateTime = getDateTime;
 }
 
 // 要考虑到可能要多层渲染
