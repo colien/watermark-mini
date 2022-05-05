@@ -1,0 +1,29 @@
+{
+  "name": "watermark-mini",
+  "version": "1.0.1",
+  "description": "水印插件。",
+  "main": "./dist/watermark.min.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --progress",
+    "dev": "cross-env NODE_ENV=development webpack --progress"
+  },
+  "author": "278773844@qq.com",
+  "license": "MIT",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/colien/watermark-mini.git"
+  },
+  "keywords": [
+    "watermark"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-transform-object-assign": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "babel-loader": "^8.2.3",
+    "cross-env": "^7.0.3",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
+  }
+}
