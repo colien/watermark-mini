@@ -302,16 +302,18 @@ exports.mockMouse = mockMouse;
 
 
 function isIE(){
-  //取得浏览器的userAgent字符串  
-  var userAgent = navigator.userAgent; 
-  //获取浏览器内核
-  var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; 
-  if(isIE) {
-      var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
-      reIE.test(userAgent);
-      var fIEVersion = parseFloat(RegExp["$1"]);
+  //取得浏览器的userAgent字符串   
+  var explorer = window.navigator.userAgent.toLowerCase();
+  var rMsie = /msie ([\d.]+)/;
+  var rIE11 = /trident.*rv:([\d.]+)/;
+  if (rIE11.test(explorer)) {	/* ie11 */
+    var ver = explorer.match(rIE11)[1];
+    return {is : true, v : ver};
+  }else if (rMsie.test(explorer)) {	/* ie */
+    var ver = explorer.match(rMsie)[1];
+    return {is : true, v : ver};
   }
-  return {is : isIE, v:fIEVersion}
+  return {is : false, v: null };
 }
 
 exports.isIE = isIE;

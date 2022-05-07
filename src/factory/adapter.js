@@ -35,8 +35,8 @@ Adapter.prototype.render = function(opts){
   render.create(this.type === 1 ? this.shadowRoot.attachShadow({mode: 'open'}) : this.shadowRoot, _opts, opts);
   this.insertDom(_opts.containerBox, this.shadowRoot);
   var isIe = isIE();
-  if(isIe.is && isIe.v != 11){
-    this.eventPenetrate(_opts)
+  if(isIe.is && parseInt(isIe.v) < 11){
+    this.eventPenetrate(_opts);
   }
 }
 
