@@ -254,9 +254,9 @@ function debounce(func, wait , opts){
       }
     }, wait);
   }
-  return function(...params){
+  return function(){
     ctx = this;
-    args = params;
+    args = Array.prototype.slice.call(arguments,0);
     clearTimeout(timer);
     timer = later();
     if(opts.immedi){
