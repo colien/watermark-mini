@@ -23,12 +23,11 @@ class Index{
     var _this = this;
     var opts = this.opts;
     // 是否监听 页面加载完成后渲染
+    this.reload(opts);
     if(opts.onLoad){
       eventListener.on(window, "load", function () {
         _this._debounceFn(opts)
       })
-    }else{
-      this.reload(opts);
     }
     // 是否监听窗口大小改变重新加载
     if(opts.onResize){
@@ -41,7 +40,8 @@ class Index{
   reload(opts){
     var _opts;
     if(opts){
-      this.opts = _opts = opts;
+      _opts = assign({} , defaultOpt);
+      this.opts = _opts = assign(_opts, opts || {});
     }
     this.watermark.init(_opts).render();
   }
@@ -57,6 +57,5 @@ class Index{
     this.watermark.remove();
   }
 }
-
 // 要考虑到可能要多层渲染
 exports.WaterMark = Index;  

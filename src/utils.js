@@ -266,3 +266,52 @@ function debounce(func, wait , opts){
 }
 
 exports.debounce = debounce;
+
+
+// 模拟用户事件
+function simulatedEvent(id, eventName, value, option) {
+  var defOption = {
+    canBubble : true,
+    cancelable : true,
+    eventType : "HTMLEvents",
+  }
+  option = Object.assign(defOption, option || {});
+
+  if(typeof value == "object"){
+    option = Object.assign(defOption, value);
+    value = undefined;
+  }
+  var ele = Object.prototype.toString.call(id) === "[object String]" ? document.getElementById(id) : id;
+  var e = document.createEvent(option.eventType);
+  e.initEvent(eventName, option.canBubble , option.cancelable); // canBubble ：是否冒泡，cancelable: 是否取消默认事件
+  value && ele && (ele.value = value);
+  ele && ele.dispatchEvent(e)
+}
+
+exports.simulatedEvent = simulatedEvent;
+
+
+function mockMouse(el, opts){
+  var btn = Object.prototype.toString.call(el) == "[object String]" ? document.getElementById(el) : el;
+  var mousedown = document.createEvent("MouseEvents");
+  mousedown.initMouseEvent("mousedown",true,true,window,0, opts.x, opts.y, opts.x, opts.y,false,false,false,false,0,null);
+  btn.dispatchEvent(mousedown);
+}
+
+exports.mockMouse = mockMouse;
+
+
+function isIE(){
+  //取得浏览器的userAgent字符串  
+  var userAgent = navigator.userAgent; 
+  //获取浏览器内核
+  var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; 
+  if(isIE) {
+      var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+      reIE.test(userAgent);
+      var fIEVersion = parseFloat(RegExp["$1"]);
+  }
+  return {is : isIE, v:fIEVersion}
+}
+
+exports.isIE = isIE;

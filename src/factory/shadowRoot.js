@@ -8,7 +8,6 @@ function ShadowRoot(opts){
 
 // 获取水印容器
 ShadowRoot.prototype.create = function(root, _opts, opts){
-  
   var x, y;
   for (var i = 0; i < _opts.rows; i++) {
     y = _opts.y + (_opts.pageHeight - _opts.allHeight) / 2 + (_opts.ySpace + _opts.boxHeight) * i;

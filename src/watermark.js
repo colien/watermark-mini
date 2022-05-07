@@ -10,14 +10,11 @@ function WaterMark(opts){
   // 初始化监听对象
   this.mutationListener = new MutationListener(this);
   this.mutationListener.init(); // 初始化监听对象
-  this.status = false; // 水印的状态
   this.key = getUUId(); // 生成一个唯一的 key
 }
 // 初始化
 WaterMark.prototype.init = function(opts){
   this.opts = opts || {}; 
-
-  this.status = false;
 
   var _opts = {
     boxId : opts.boxId + "_" + this.key,
@@ -52,7 +49,6 @@ WaterMark.prototype.init = function(opts){
   this._calcTotalLength(_opts, opts, containerBox);
 
   this._opts = _opts;
-  console.log(_opts);
 
   return this;
 }
@@ -81,20 +77,22 @@ WaterMark.prototype._calaBoxSize = function(_opts, opts){
   span.style.overflow = "hidden";
   span.style.whiteSpace = "nowrap";
   span.style.textOverflow = "ellipsis";
-  //span.style.minWidth = "30px";
-  //span.style.maxWidth = "120px";
   span.style.position = "absolute";
-  //span.style.padding = "0 3px";
-  //span.style.marginLeft = "15px";
+  span.style.boxSizing = "border-box";
+  span.style.width = "-webkit-max-content";
+  span.style.width = "-moz-max-content";
+  span.style.width = "max-content";
   document.body.appendChild(span);
   if (typeof span.textContent !== "undefined") {
       span.textContent = opts.content;
   } else {
       span.innerText = opts.content;
   }
-  _opts.boxWidth = span.offsetWidth;// - result.width;
-  _opts.boxHeight = span.offsetHeight;// - result.height;
+  _opts.boxWidth = span.offsetWidth + 10;// - result.width;
+  _opts.boxHeight = span.offsetHeight + 2;// - result.height;
+  console.log(_opts, span.offsetWidth, span.clientWidth, span.scrollWidth, span.width)
   span.parentNode.removeChild(span);
+  
 }
 
 /* 获取页面宽度 */
