@@ -47,7 +47,7 @@ Adapter.prototype.getShadowRoot = function(_opts){
   var shadowRoot;
   var otdiv = document.createElement('div');
   otdiv.id = _opts.boxId;
-  otdiv.setAttribute('style','pointer-events: none !important; display: block !important');
+  otdiv.setAttribute('style','pointer-events: none !important; display: block !important;overflow:hidden;');
   otdiv.style.position = "absolute";
   otdiv.style.zIndex = 10000;
   otdiv.style.top = 0;
