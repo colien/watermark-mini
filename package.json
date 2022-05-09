@@ -1,6 +1,6 @@
 {
   "name": "watermark-mini",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "水印插件。",
   "main": "./dist/watermark.min.js",
   "scripts": {

@@ -60,6 +60,7 @@ Adapter.prototype.getShadowRoot = function(_opts){
 
 Adapter.prototype.insertDom = function(containerBox, otdiv){
   /* 将 shadow dom 随机插入 body 内的任意位置 */
+  containerBox.style.position = "relative";
   var nodeList = containerBox.children;
   var index = Math.floor(Math.random()*(nodeList.length-1 ));
   if(nodeList[index]){

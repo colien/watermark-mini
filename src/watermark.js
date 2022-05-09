@@ -88,7 +88,7 @@ WaterMark.prototype._calaBoxSize = function(_opts, opts){
   } else {
       span.innerText = opts.content;
   }
-  _opts.boxWidth = span.offsetWidth + 4;// - result.width;
+  _opts.boxWidth = span.offsetWidth + 3;// - result.width;
   _opts.boxHeight = span.offsetHeight;// - result.height;
   span.parentNode.removeChild(span);
   
