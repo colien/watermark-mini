@@ -11,7 +11,7 @@ function Adapter(_opts){
     return new Adapter(_opts);
   }
   // 支持什么模式的渲染，1：shadowRoot； 2: canvas； 3：普通元素；
-  this.type = isFun(document.createElement("div").attachShadow ? 1 : document.createElement("canvas").getContext ? 2 : 3);
+  this.type = isFun(document.createElement("div").attachShadow) ? 1 : document.createElement("canvas").getContext ? 2 : 3;
   this.init(_opts);
   this._opts = _opts;
 }
@@ -27,12 +27,13 @@ Adapter.prototype.render = function(opts){
   var _opts = this._opts;
   var render;
   // 创建水印列表
-  if(this.type !== 2){  // canvas 渲染
+  /* if(this.type !== 2){  // canvas 渲染
     render = new ShadowRoot();
   }else{
     render = new Canvas();
-  }
-  render.create(this.type === 1 ? this.shadowRoot.attachShadow({mode: 'open'}) : this.shadowRoot, _opts, opts);
+  } */
+  render = new ShadowRoot();
+  render.create(this.type !== 1 ? this.shadowRoot : this.shadowRoot.attachShadow({mode: 'open'}), _opts, opts);
   this.insertDom(_opts.containerBox, this.shadowRoot);
   var isIe = isIE();
   if(isIe.is && parseInt(isIe.v) < 11){

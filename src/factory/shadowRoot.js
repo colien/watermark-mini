@@ -44,8 +44,6 @@ ShadowRoot.prototype.createItem = function(x, y, i, j, _opts, opts){
   mask_div.style.lineHeight = opts.fontSize;
   mask_div.style.color = opts.fontColor;
   mask_div.style.textAlign = opts.textAlign;
-  mask_div.style.width = _opts.boxWidth + "px";
-  mask_div.style.height = _opts.boxHeight + "px";
   mask_div.style.display = "block";
   mask_div.style['-ms-user-select'] = "none";
   return mask_div;
