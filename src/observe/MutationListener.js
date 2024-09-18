@@ -1,38 +1,40 @@
-
 // 监听对象类
-function MutationListener(watermark){
-  if(!(this instanceof MutationListener)){
+function MutationListener(watermark) {
+  if (!(this instanceof MutationListener)) {
     return new MutationListener(watermark);
   }
   this.watermark = watermark; // 水印实例对象
-  this.MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+  this.MutationObserver =
+    window.MutationObserver ||
+    window.WebKitMutationObserver ||
+    window.MozMutationObserver;
   this.watermarkDom;
   this.oldOpts = {
     width: 0,
-    height: 0
+    height: 0,
   };
   this.option = {
-    'childList': true,
-    'attributes': true,
-    'subtree': true,
-    'attributeFilter': ['style'],
-    'attributeOldValue': true
-  }
+    childList: true,
+    attributes: true,
+    subtree: true,
+    attributeFilter: ["style"],
+    attributeOldValue: true,
+  };
 }
 // 初始化监听对象
-MutationListener.prototype.init = function(){
-  if(this.MutationObserver){
+MutationListener.prototype.init = function () {
+  if (this.MutationObserver) {
     // 获取回调函数
     var cb = this.callback(this.watermark);
     // 创建监听dom
-    this.watermarkDom = new (this.MutationObserver)(cb);
+    this.watermarkDom = new this.MutationObserver(cb);
   }
-}
+};
 
 // 元素移除时的回调方法
-MutationListener.prototype.callback = function(watermark){
+MutationListener.prototype.callback = function (watermark) {
   var _this = this;
-  return function(records){
+  return function (records) {
     // 这个判断太粗糙
     if (records.length > 0) {
       watermark.render();
@@ -50,28 +52,27 @@ MutationListener.prototype.callback = function(watermark){
         watermark.init(_initOpts);
       }
     } */
-  }
-}
+  };
+};
 // 绑定元素变更监听
-MutationListener.prototype.onListener = function(_opts, opts){
+MutationListener.prototype.onListener = function (_opts, opts) {
   // monitor 是否监控， true: 不可删除水印; false: 可删水印。
   if (opts.monitor && this.watermarkDom) {
     var box = document.getElementById(_opts.boxId);
-    if(box){
+    if (box) {
       this.watermarkDom.observe(box, this.option);
       // 如果有 shadowRoot，则也要添加
-      if(box.shadowRoot){
+      if (box.shadowRoot) {
         this.watermarkDom.observe(box.shadowRoot, this.option);
       }
     }
   }
-}
+};
 // 移除元素变更监听
-MutationListener.prototype.removeListener = function(){
-  if(this.watermarkDom){
+MutationListener.prototype.removeListener = function () {
+  if (this.watermarkDom) {
     this.watermarkDom.disconnect();
   }
-}
+};
 
 exports.MutationListener = MutationListener;
-
