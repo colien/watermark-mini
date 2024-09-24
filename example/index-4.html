@@ -7,11 +7,14 @@
     <style>
       html,
       body {
+        margin: 0;
+        padding: 0;
         height: 100%;
       }
     </style>
   </head>
   <body>
+    <button onclick="delWaterMark()">删除水印</button>
     <script type="text/javascript" src="../dist/watermark.min.js"></script>
     <script>
       const WaterMark = window.WaterMark.WaterMark;
@@ -25,6 +28,11 @@
         yPadding: "2px",
         renderType: 2,
       }).init();
+
+      function delWaterMark() {
+        const div = document.getElementsByTagName("div");
+        div[0].remove();
+      }
     </script>
   </body>
 </html>

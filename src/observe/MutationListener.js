@@ -33,13 +33,22 @@ MutationListener.prototype.init = function () {
 
 // 元素移除时的回调方法
 MutationListener.prototype.callback = function (watermark) {
-  var _this = this;
   return function (records) {
-    // 这个判断太粗糙
-    if (records.length > 0) {
-      watermark.render();
-      return;
-    }
+    const id = watermark._opts.boxId;
+    records.forEach((mutation) => {
+      mutation.removedNodes.forEach((node) => {
+        if (node.id === id) {
+          watermark.render();
+        }
+      });
+    });
+    // console.log(records);
+
+    // // 这个判断太粗糙
+    // if (records.length > 0) {
+    //   watermark.render();
+    //   return;
+    // }
 
     // 监听父节点的尺寸是否发生了变化, 如果发生改变, 则进行重新绘制
     /* var containerNode = watermark.containerNode;
@@ -60,10 +69,10 @@ MutationListener.prototype.onListener = function (_opts, opts) {
   if (opts.monitor && this.watermarkDom) {
     var box = document.getElementById(_opts.boxId);
     if (box) {
-      this.watermarkDom.observe(box, this.option);
+      this.watermarkDom.observe(box.parentNode, this.option);
       // 如果有 shadowRoot，则也要添加
-      if (box.shadowRoot) {
-        this.watermarkDom.observe(box.shadowRoot, this.option);
+      if (box.shadowRoot && box.shadowRoot.parentNode) {
+        this.watermarkDom.observe(box.shadowRoot.parentNode, this.option);
       }
     }
   }
