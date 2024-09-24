@@ -74,27 +74,31 @@ WaterMark.prototype.render = function () {
 // 计算水印内容的宽高
 WaterMark.prototype._calaBoxSize = function (_opts, opts) {
   //fontSize:代表汉字的大小，英文字会自动按照默认值
-  var span = document.createElement("span");
-  span.style.visibility = "hidden";
-  span.style.fontSize = opts.fontSize;
-  span.style.lineHeight = opts.fontSize;
-  span.style.overflow = "hidden";
-  span.style.whiteSpace = "nowrap";
-  span.style.textOverflow = "ellipsis";
-  span.style.position = "absolute";
-  span.style.boxSizing = "border-box";
-  span.style.width = "-webkit-max-content";
-  span.style.width = "-moz-max-content";
-  span.style.width = "max-content";
-  document.body.appendChild(span);
-  if (typeof span.textContent !== "undefined") {
-    span.textContent = opts.content;
+  var div = document.createElement("div");
+  div.style.visibility = "hidden";
+  div.style.fontSize = opts.fontSize;
+  div.style.lineHeight = opts.lineHeight;
+  div.style.paddingLeft = opts.xPadding;
+  div.style.paddingRight = opts.xPadding;
+  div.style.paddingTop = opts.yPadding;
+  div.style.paddingBottom = opts.yPadding;
+  div.style.overflow = "hidden";
+  div.style.whiteSpace = "nowrap";
+  div.style.textOverflow = "ellipsis";
+  div.style.position = "absolute";
+  div.style.boxSizing = "border-box";
+  div.style.width = "-webkit-max-content";
+  div.style.width = "-moz-max-content";
+  div.style.width = "max-content";
+  document.body.appendChild(div);
+  if (typeof div.textContent !== "undefined") {
+    div.textContent = opts.content;
   } else {
-    span.innerText = opts.content;
+    div.innerText = opts.content;
   }
-  _opts.boxWidth = span.offsetWidth + 3; // - result.width;
-  _opts.boxHeight = span.offsetHeight; // - result.height;
-  span.parentNode.removeChild(span);
+  _opts.boxWidth = div.offsetWidth + 3; // - result.width;
+  _opts.boxHeight = div.offsetHeight; // - result.height;
+  div.parentNode.removeChild(div);
 };
 
 /* 获取页面宽度 */

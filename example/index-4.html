@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript" src="../dist/watermark.min.js"></script>
+    <script>
+      const WaterMark = window.WaterMark.WaterMark;
+
+      new WaterMark({
+        content: "oms",
+        lineHeight: "1.2",
+        fontAlpha: 0.1,
+        rotateAngle: 0,
+        xPadding: "3px",
+        yPadding: "2px",
+        renderType: 2,
+      }).init();
+    </script>
+  </body>
+</html>

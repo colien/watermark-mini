@@ -25,22 +25,20 @@ Canvas.prototype.create = function (root, _opts, opts) {
 };
 // 明水印
 Canvas.prototype.createCanvas = function (_opts, opts) {
-  var maxLen = Math.max(_opts.boxWidth, _opts.boxHeight);
-
   const canvas = document.createElement("canvas");
-  canvas.setAttribute("width", maxLen);
-  canvas.setAttribute("height", maxLen);
+  canvas.setAttribute("width", _opts.boxWidth);
+  canvas.setAttribute("height", _opts.boxHeight);
 
   const ctx = canvas.getContext("2d");
   ctx.textAlign = opts.textAlign;
-  ctx.textBaseline = _opts.boxHeight;
+  // ctx.textBaseline = _opts.boxHeight;
   ctx.font = `${opts.fontSize} ${opts.fontFamily}`;
   ctx.fillStyle = `rgba(0, 0, 0, ${opts.fontAlpha})`;
   ctx.rotate(opts.rotateAngle);
   ctx.fillText(
     opts.content,
-    parseFloat(maxLen) / 2,
-    parseFloat(maxLen) / 2
+    parseFloat(_opts.boxWidth) / 2,
+    parseFloat(_opts.boxHeight)
   );
 
   return canvas;

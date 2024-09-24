@@ -6,9 +6,12 @@ var defaultOpt = {
   y: 0, // 垂直方向上的起始位移
   xSpace: 0,
   ySpace: 0,
+  xPadding: "0px",
+  yPadding: "0px",
   fontColor: "#000000", // 字体颜色
   fontAlpha: 0.1, // 文字颜色透明度
   fontSize: "12px", // 字体大小
+  lineHeight: "1", // 行高
   fontFamily: "Microsoft Yahei", // 字体
   rotateAngle: 20, // 旋转角度
   bgAlpha: 0.1, // 背景颜色透明度
