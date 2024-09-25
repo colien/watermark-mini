@@ -1,8 +1,9 @@
 # watermark-mini
+
 一个比较轻量级的水印插件。
 
-
 ## 一、浏览器兼容性
+
 主流浏览器都兼容
 
 IE 浏览器 在 11 版本可用，但是不建议监听浏览器的窗口大小变化，因为这会造成浏览器重新渲染水印时卡顿。
@@ -31,6 +32,7 @@ new WaterMark({
 ```
 
 ### 2. 模块化引入
+
 npm install watermark-mini
 
 new WaterMark(options|Object)
@@ -54,9 +56,10 @@ new WaterMark({
 
 有些时候我们需要同时渲染明水印和盲水印，可以创建两层水印，后期会在一个水印层同时支持多层水印。
 
-
 ## 三、配置参数
+
 options 的参数，以及默认值
+
 ```
 boxId: 'wm_container_id',       // 水印容器的 div
 content: "",                    // 水印内容文字
@@ -64,6 +67,8 @@ x: 0,                           // 水平方向上的起始位移
 y: 0,                           // 垂直方向上的起始位移
 xSpace: 0,                      // 水平方向上水印的间隔
 ySpace: 0,                      // 垂直方向上水印的间隔
+xPadding:"0px"                  // 水平方向上内边距
+yPadding:"0px"                  // 垂直方向上内边距
 fontColor: "#000000",           // 水印文字的的字体颜色
 fontAlpha: 0.1,                 // 文字颜色透明度
 fontSize: "12px",               // 水印文字的大小
@@ -78,16 +83,11 @@ containerNode : null,           // 水印插件挂载的父元素 element,不输
 coverAreaId : null,             // 覆盖的区域的id （暂时无用）
 onLoad : true,                  // 是否监听页面加载完成后渲染
 onResize : true,                // 是否监听窗口大小改变后渲染
+renderType : 1                  // 渲染方式 1：shadowRoot； 2: canvas； 3：普通元素；
 ```
 
 ## 后期计划
+
 支持在同一水印容器渲染多层水印
 
 支持 IE 11 以下的水印。
-
-
-
-
-
-
-
