@@ -30,15 +30,15 @@ Canvas.prototype.createCanvas = function (_opts, opts) {
   canvas.setAttribute("height", _opts.boxHeight);
 
   const ctx = canvas.getContext("2d");
-  ctx.textAlign = opts.textAlign;
-  // ctx.textBaseline = _opts.boxHeight;
+  ctx.textAlign = opts.textAlign || "center"; // 默认居中对齐
+  ctx.textBaseline = "middle"; // 使用 'middle' 以便垂直居中
   ctx.font = `${opts.fontSize} ${opts.fontFamily}`;
   ctx.fillStyle = `rgba(0, 0, 0, ${opts.fontAlpha})`;
-  ctx.rotate(opts.rotateAngle);
+  ctx.rotate((opts.rotateAngle * Math.PI) / 180); // 将角度转换为弧度
   ctx.fillText(
     opts.content,
     parseFloat(_opts.boxWidth) / 2,
-    parseFloat(_opts.boxHeight)
+    parseFloat(_opts.boxHeight) / 2 // 垂直居中显示
   );
 
   return canvas;
